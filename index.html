@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pagecraft — Edit PDF files online</title>
+<meta name="description" content="Edit PDF files in your browser: change text, add images and signatures, white-out, highlight, merge, split and organize pages. Private — files never leave your device.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Caveat:wght@600&family=Dancing+Script:wght@600&family=Great+Vibes&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2315803d'/%3E%3Cpath d='M10 7h8l5 5v13H10z' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linejoin='round'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#15803d">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-view="home">
+
+<!-- ================= ICON SPRITE ================= -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-pointer" viewBox="0 0 24 24"><path d="M5 3l6.5 17 2.4-7.1L21 10.5z"/></symbol>
+    <symbol id="i-type" viewBox="0 0 24 24"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></symbol>
+    <symbol id="i-edittext" viewBox="0 0 24 24"><path d="M3 6V4h11v2M8.5 4v14M6 18h5M14 21l7-7-2-2-7 7v2z"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 15l-5-5L5 20"/></symbol>
+    <symbol id="i-sign" viewBox="0 0 24 24"><path d="M3 16c3 0 3.5-8 6-8s.5 8 3 8 3-4 5-4 2 3 4 3M3 21h18"/></symbol>
+    <symbol id="i-eraser" viewBox="0 0 24 24"><path d="M20 20H9l-5-5a2 2 0 0 1 0-2.8l8.2-8.2a2 2 0 0 1 2.8 0l5 5a2 2 0 0 1 0 2.8L12 19.8M8 11l5 5"/></symbol>
+    <symbol id="i-highlight" viewBox="0 0 24 24"><path d="M9 11l-6 6v3h9l3-3M22 12l-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"/></symbol>
+    <symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></symbol>
+    <symbol id="i-shapes" viewBox="0 0 24 24"><rect x="3" y="3" width="9" height="9" rx="1"/><circle cx="16.5" cy="16.5" r="4.5"/></symbol>
+    <symbol id="i-square" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="1"/></symbol>
+    <symbol id="i-circle" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="7"/></symbol>
+    <symbol id="i-line" viewBox="0 0 24 24"><path d="M5 19L19 5"/></symbol>
+    <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 14L4 9l5-5M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></symbol>
+    <symbol id="i-redo" viewBox="0 0 24 24"><path d="M15 14l5-5-5-5M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></symbol>
+    <symbol id="i-zoomin" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></symbol>
+    <symbol id="i-zoomout" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M8 11h6"/></symbol>
+    <symbol id="i-fit" viewBox="0 0 24 24"><path d="M4 9V5h4M20 9V5h-4M4 15v4h4M20 15v4h-4"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6M10 11v6M14 11v6M9 6V4h6v2"/></symbol>
+    <symbol id="i-rotr" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.4L21 8M21 3v5h-5"/></symbol>
+    <symbol id="i-rotl" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 2.6-6.4L3 8M3 3v5h5"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></symbol>
+    <symbol id="i-merge" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3M16 3h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3M8 12h8M12 8l4 4-4 4"/></symbol>
+    <symbol id="i-split" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4L8.1 15.9M14.5 14.5L20 20M8.1 8.1L12 12"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></symbol>
+    <symbol id="i-bold" viewBox="0 0 24 24"><path d="M7 4h7a4 4 0 0 1 0 8H7zM7 12h8a4 4 0 0 1 0 8H7z"/></symbol>
+    <symbol id="i-italic" viewBox="0 0 24 24"><path d="M19 4h-9M14 20H5M15 4L9 20"/></symbol>
+    <symbol id="i-alignl" viewBox="0 0 24 24"><path d="M3 6h18M3 12h12M3 18h16"/></symbol>
+    <symbol id="i-alignc" viewBox="0 0 24 24"><path d="M3 6h18M6 12h12M4 18h16"/></symbol>
+    <symbol id="i-alignr" viewBox="0 0 24 24"><path d="M3 6h18M9 12h12M5 18h16"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6"/></symbol>
+    <symbol id="i-fileplus" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M12 18v-6M9 15h6"/></symbol>
+    <symbol id="i-extract" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M12 11v7M9 15l3 3 3-3"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+    <symbol id="i-chevl" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></symbol>
+    <symbol id="i-chevr" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></symbol>
+    <symbol id="i-files" viewBox="0 0 24 24"><path d="M15 2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7zM15 2v5h5"/><path d="M3 7v13a2 2 0 0 0 2 2h10"/></symbol>
+    <symbol id="i-zip" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M10 4h1M10 7h1M10 10h1M10 13h1M9.5 16h2v3h-2z"/></symbol>
+    <symbol id="i-sidebar" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></symbol>
+    <symbol id="i-front" viewBox="0 0 24 24"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M4 16V5a1 1 0 0 1 1-1h11"/></symbol>
+  </defs>
+</svg>
+
+<!-- ================= HOME ================= -->
+<div id="view-home" class="view">
+  <header class="site-header">
+    <a class="logo" href="#" data-go="home">
+      <span class="logo-mark"><svg><use href="#i-file"/></svg></span>
+      Pagecraft
+    </a>
+    <nav class="site-nav">
+      <a href="#" data-tool="edit">Edit</a>
+      <a href="#" data-tool="sign">Sign</a>
+      <a href="#" data-tool="merge">Merge</a>
+      <a href="#" data-tool="split">Split</a>
+      <a href="#" data-tool="organize">Organize</a>
+      <a href="#" data-tool="batch">Batch</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="eyebrow"><svg><use href="#i-shield"/></svg> Private · runs entirely in your browser</span>
+    <h1>Edit PDF files, <span class="hl">right in your browser</span></h1>
+    <p class="lead">Change existing text, add text, images and signatures, white-out, highlight and draw. Merge, split, rotate and reorder pages. Free, no sign-up, and your files never leave your device.</p>
+
+    <div class="dropzone" id="dropzone" role="region" aria-label="Upload area">
+      <div class="dz-inner">
+        <button class="btn btn-primary btn-xl" data-tool="edit"><svg><use href="#i-upload"/></svg> Upload PDF file</button>
+        <p class="dz-hint">or drop PDFs here — pick several to edit them as separate documents</p>
+        <button class="linkish" id="startBlank">Start with a blank document</button>
+      </div>
+      <div class="dz-over">Drop your PDF to start editing</div>
+    </div>
+  </section>
+
+  <section class="tools-section">
+    <h2>Everything you need for PDFs</h2>
+    <div class="tool-grid">
+      <button class="tool-card" data-tool="edit"><span class="tc-icon c1"><svg><use href="#i-edittext"/></svg></span><b>Edit PDF</b><span>Change text, add text, images, shapes and highlights.</span></button>
+      <button class="tool-card" data-tool="sign"><span class="tc-icon c2"><svg><use href="#i-sign"/></svg></span><b>Fill &amp; Sign</b><span>Draw, type or upload your signature and place it anywhere.</span></button>
+      <button class="tool-card" data-tool="merge"><span class="tc-icon c3"><svg><use href="#i-merge"/></svg></span><b>Merge PDF</b><span>Combine multiple PDFs into one and arrange the pages.</span></button>
+      <button class="tool-card" data-tool="split"><span class="tc-icon c4"><svg><use href="#i-split"/></svg></span><b>Split PDF</b><span>Split by page ranges or every N pages, download as ZIP.</span></button>
+      <button class="tool-card" data-tool="organize"><span class="tc-icon c5"><svg><use href="#i-grid"/></svg></span><b>Organize &amp; Rotate</b><span>Reorder, rotate, delete, duplicate and insert pages.</span></button>
+      <button class="tool-card" data-tool="extract"><span class="tc-icon c6"><svg><use href="#i-extract"/></svg></span><b>Extract pages</b><span>Pick the pages you need and save them as a new PDF.</span></button>
+      <button class="tool-card" data-tool="batch"><span class="tc-icon c7"><svg><use href="#i-files"/></svg></span><b>Batch edit</b><span>Open many PDFs at once, edit each one separately, and download them all as a ZIP.</span></button>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="feature"><svg><use href="#i-shield"/></svg><div><b>Private by design</b><p>Files are processed locally with JavaScript. Nothing is uploaded to a server.</p></div></div>
+    <div class="feature"><svg><use href="#i-zap"/></svg><div><b>Fast</b><p>No upload or download wait. Edits are applied instantly on your device.</p></div></div>
+    <div class="feature"><svg><use href="#i-user"/></svg><div><b>No sign-up</b><p>No account, no watermarks, no limits on pages or tasks.</p></div></div>
+  </section>
+
+  <footer class="site-footer">Pagecraft · A browser-based PDF editor</footer>
+</div>
+
+<!-- ================= EDITOR ================= -->
+<div id="view-editor" class="view">
+  <div class="ed-top">
+    <div class="ed-left">
+      <button class="icon-btn" id="edBack" title="Back to home"><svg><use href="#i-back"/></svg></button>
+      <button class="icon-btn only-mobile" id="sidebarToggle" title="Pages"><svg><use href="#i-sidebar"/></svg></button>
+      <div class="ed-file"><svg><use href="#i-file"/></svg><span id="edFileName">document.pdf</span></div>
+    </div>
+
+    <div class="ed-tools" id="toolbar" role="toolbar" aria-label="Editing tools">
+      <button class="tool" data-tool="select" title="Select (V)"><svg><use href="#i-pointer"/></svg><span>Select</span></button>
+      <button class="tool" data-tool="edittext" title="Edit existing text"><svg><use href="#i-edittext"/></svg><span>Edit text</span></button>
+      <button class="tool" data-tool="text" title="Add text (T)"><svg><use href="#i-type"/></svg><span>Text</span></button>
+      <button class="tool" data-tool="sign" title="Sign"><svg><use href="#i-sign"/></svg><span>Sign</span></button>
+      <button class="tool" data-tool="image" title="Add image"><svg><use href="#i-image"/></svg><span>Image</span></button>
+      <button class="tool" data-tool="whiteout" title="White-out (cover content)"><svg><use href="#i-eraser"/></svg><span>Whiteout</span></button>
+      <button class="tool" data-tool="highlight" title="Highlight"><svg><use href="#i-highlight"/></svg><span>Highlight</span></button>
+      <button class="tool" data-tool="draw" title="Draw (freehand)"><svg><use href="#i-pen"/></svg><span>Draw</span></button>
+      <div class="tool-menu-wrap">
+        <button class="tool" data-tool="shapes" id="shapesBtn" title="Shapes"><svg><use href="#i-shapes"/></svg><span>Shapes <svg class="chev"><use href="#i-chev"/></svg></span></button>
+        <div class="menu" id="shapesMenu" hidden>
+          <button data-shape="rect"><svg><use href="#i-square"/></svg>Rectangle</button>
+          <button data-shape="ellipse"><svg><use href="#i-circle"/></svg>Ellipse</button>
+          <button data-shape="line"><svg><use href="#i-line"/></svg>Line</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ed-right">
+      <button class="icon-btn" id="undoBtn" title="Undo (Ctrl+Z)" disabled><svg><use href="#i-undo"/></svg></button>
+      <button class="icon-btn" id="redoBtn" title="Redo (Ctrl+Shift+Z)" disabled><svg><use href="#i-redo"/></svg></button>
+      <span class="sep"></span>
+      <div class="zoom">
+        <button class="icon-btn" id="zoomOut" title="Zoom out"><svg><use href="#i-zoomout"/></svg></button>
+        <button class="zoom-val" id="zoomVal" title="Fit to width">100%</button>
+        <button class="icon-btn" id="zoomIn" title="Zoom in"><svg><use href="#i-zoomin"/></svg></button>
+      </div>
+      <button class="btn btn-primary" id="exportBtn" aria-label="Apply changes and download" title="Apply changes and download"><svg><use href="#i-download"/></svg><span>Apply changes</span></button>
+    </div>
+  </div>
+
+  <div class="docbar" id="docBar" hidden>
+    <button class="icon-btn sm" id="docPrev" title="Previous PDF (Alt+←)" aria-label="Previous PDF"><svg><use href="#i-chevl"/></svg></button>
+    <div class="doc-tabs" id="docTabs" role="tablist" aria-label="Open PDFs"></div>
+    <button class="icon-btn sm" id="docNext" title="Next PDF (Alt+→)" aria-label="Next PDF"><svg><use href="#i-chevr"/></svg></button>
+    <span class="doc-count" id="docCount">1 / 1</span>
+    <button class="icon-btn sm" id="docAdd" title="Open more PDFs" aria-label="Open more PDFs"><svg><use href="#i-plus"/></svg></button>
+    <button class="btn btn-primary btn-sm" id="zipBtn" title="Download every PDF, edited, in one ZIP"><svg><use href="#i-zip"/></svg><span>Download all (ZIP)</span></button>
+  </div>
+  <div class="props" id="propsBar"></div>
+
+  <div class="ed-body">
+    <aside class="ed-sidebar" id="sidebar">
+      <div class="sb-head">
+        <span class="sb-title">Pages <em id="pageCount">0</em></span>
+        <div class="sb-actions">
+          <button class="icon-btn sm" id="addPdfBtn" title="Add pages from another PDF (merge)"><svg><use href="#i-fileplus"/></svg></button>
+          <button class="icon-btn sm" id="addBlankBtn" title="Add blank page at the end"><svg><use href="#i-plus"/></svg></button>
+          <button class="icon-btn sm" id="gridBtn" title="Organize pages (grid view)"><svg><use href="#i-grid"/></svg></button>
+        </div>
+      </div>
+      <div class="organize-head">
+        <div>
+          <h3>Organize pages</h3>
+          <p>Drag pages to reorder. Hover a page to rotate, duplicate, insert a blank page or delete.</p>
+        </div>
+        <button class="btn" id="gridDone"><svg><use href="#i-check"/></svg> Back to editing</button>
+      </div>
+      <div class="thumbs" id="thumbList"></div>
+    </aside>
+
+    <main class="ed-main" id="pagesScroll">
+      <div id="pagesContainer"></div>
+    </main>
+    <div class="page-indicator" id="pageIndicator">1 / 1</div>
+  </div>
+</div>
+
+<!-- ================= SPLIT ================= -->
+<div id="view-split" class="view">
+  <div class="ed-top">
+    <div class="ed-left">
+      <button class="icon-btn" data-go="home" title="Back to home"><svg><use href="#i-back"/></svg></button>
+      <div class="ed-file"><svg><use href="#i-file"/></svg><span id="splitFileName">document.pdf</span></div>
+    </div>
+    <div class="ed-right"><button class="btn btn-primary" id="splitGo" aria-label="Split PDF"><svg><use href="#i-split"/></svg><span id="splitGoLabel">Split PDF</span></button></div>
+  </div>
+  <div class="split-body">
+    <aside class="split-opts">
+      <h3 id="splitTitle">Split PDF</h3>
+      <label class="radio"><input type="radio" name="smode" value="each" checked> <span><b>Every page</b><small>One PDF per page</small></span></label>
+      <label class="radio"><input type="radio" name="smode" value="every"> <span><b>Every N pages</b><small>Split into chunks of <input type="number" id="splitN" min="1" value="2"> pages</small></span></label>
+      <label class="radio"><input type="radio" name="smode" value="ranges"> <span><b>Custom ranges</b><small>One PDF per range</small><input type="text" id="splitRanges" placeholder="e.g. 1-3, 5, 8-10"></span></label>
+      <label class="radio"><input type="radio" name="smode" value="extract"> <span><b>Extract selected pages</b><small>Click pages to select them — saved as one PDF</small></span></label>
+      <div class="split-summary" id="splitSummary"></div>
+    </aside>
+    <main class="split-pages" id="splitPages"></main>
+  </div>
+</div>
+
+<!-- ================= SIGNATURE MODAL ================= -->
+<div class="modal" id="signModal" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="signTitle">
+    <div class="modal-head">
+      <h3 id="signTitle">Add signature</h3>
+      <button class="icon-btn" data-close title="Close" aria-label="Close"><svg><use href="#i-x"/></svg></button>
+    </div>
+    <div class="tabs" id="signTabs" role="tablist" aria-label="Signature method">
+      <button type="button" role="tab" id="sigTab-draw" data-tab="draw" class="on" aria-selected="true" aria-controls="sigPane-draw">Draw</button>
+      <button type="button" role="tab" id="sigTab-type" data-tab="type" aria-selected="false" aria-controls="sigPane-type" tabindex="-1">Type</button>
+      <button type="button" role="tab" id="sigTab-upload" data-tab="upload" aria-selected="false" aria-controls="sigPane-upload" tabindex="-1">Upload</button>
+      <button type="button" role="tab" id="savedTab" data-tab="saved" aria-selected="false" aria-controls="sigPane-saved" tabindex="-1" hidden>Saved</button>
+    </div>
+    <div class="tab-pane" data-pane="draw" id="sigPane-draw" role="tabpanel" aria-labelledby="sigTab-draw">
+      <div class="sig-pad-wrap"><canvas id="sigPad" role="img" aria-label="Signature drawing pad"></canvas><div class="sig-line">Sign above the line</div></div>
+      <div class="sig-row">
+        <div class="swatches" id="sigColors">
+          <button class="sw on" data-c="#111827" style="--c:#111827" title="Black"></button>
+          <button class="sw" data-c="#1d4ed8" style="--c:#1d4ed8" title="Blue"></button>
+          <button class="sw" data-c="#b91c1c" style="--c:#b91c1c" title="Red"></button>
+        </div>
+        <button class="btn btn-ghost" id="sigClear">Clear</button>
+      </div>
+    </div>
+    <div class="tab-pane" data-pane="type" id="sigPane-type" role="tabpanel" aria-labelledby="sigTab-type" hidden>
+      <input type="text" id="sigName" class="input-lg" placeholder="Type your name" aria-label="Your name" maxlength="60">
+      <div class="sig-fonts" id="sigFonts">
+        <button class="on" data-font="Dancing Script" style="font-family:'Dancing Script'">Your Name</button>
+        <button data-font="Great Vibes" style="font-family:'Great Vibes'">Your Name</button>
+        <button data-font="Caveat" style="font-family:'Caveat'">Your Name</button>
+      </div>
+    </div>
+    <div class="tab-pane" data-pane="upload" id="sigPane-upload" role="tabpanel" aria-labelledby="sigTab-upload" hidden>
+      <label class="upload-box">
+        <input type="file" id="sigUpload" accept="image/*" class="sr-only">
+        <svg><use href="#i-upload"/></svg>
+        <span>Choose an image of your signature</span>
+        <small>PNG with a transparent background works best</small>
+      </label>
+      <img id="sigUploadPreview" alt="Uploaded signature preview" hidden>
+    </div>
+    <div class="tab-pane" data-pane="saved" id="sigPane-saved" role="tabpanel" aria-labelledby="savedTab" hidden>
+      <div class="saved-sigs" id="savedSigs"></div>
+    </div>
+    <div class="modal-foot">
+      <label class="check"><input type="checkbox" id="sigRemember"> Remember on this device</label>
+      <button class="btn btn-primary" id="sigUse">Use signature</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= MISC ================= -->
+<div class="busy" id="busy" role="status" aria-live="assertive" hidden><div class="busy-card"><div class="spinner"></div><span id="busyMsg">Working…</span></div></div>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<input type="file" id="pdfInput" accept="application/pdf,.pdf" hidden>
+<input type="file" id="pdfMultiInput" accept="application/pdf,.pdf" multiple hidden>
+<input type="file" id="imageInput" accept="image/*" hidden>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/signature.js"></script>
+<script src="js/textedit.js"></script>
+<script src="js/editor.js"></script>
+<script src="js/split.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
